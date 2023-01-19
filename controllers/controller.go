@@ -183,9 +183,9 @@ func Login(c *fiber.Ctx) error{
         log.Fatal(err)
     }
 
-    user:= models.User{ }
+    var user models.User
 
-    config.DB.Where("username=?", body["username"]).Preload("Food").Preload("Food.Ingredient").First(&user)
+    config.DB.Where("username=?", body["username"]).Preload("Food").Preload("Food.Ingredient").Find(&user)
     if user.ID == 0 {
             // c.Status(fiber.StatusNotFound)
             return c.JSON(user)

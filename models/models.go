@@ -8,8 +8,8 @@ type User struct{
     Email string `json:"email"`
     Age string `json:"age"`
     Gender string `json:"gender"`
-    Height string `json:"height"`
-    Weight string `json:"weight"`
+    Height int `json:"height"`
+    Weight int `json:"weight"`
     Goal string `json:"goal"`
     Activity string `json:"activity"`
     Password string `json:"password"`
@@ -19,7 +19,7 @@ type User struct{
 type Food struct{
     gorm.Model
     Name string `gorm:""json:"name"`
-    Calories string `json:"calories"`
+    Calories int `json:"calories"`
     Ingredient []Ingredient `json:"ingredients"`
     UserId uint `json:"userId"`
 }
