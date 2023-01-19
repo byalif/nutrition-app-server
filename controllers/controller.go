@@ -188,9 +188,7 @@ func Login(c *fiber.Ctx) error{
     config.DB.Where("username=?", body["username"]).Preload("Food").Preload("Food.Ingredient").First(&user)
     if user.Username != body["username"] {
             // c.Status(fiber.StatusNotFound)
-            return c.JSON(fiber.Map{
-                "error" : "NOT_FOUND",
-            })
+            return c.JSON(user)
     }else {
         if err := bcrypt.CompareHashAndPassword([]byte(user.Password),  []byte(body["password"])); err != nil {
             c.Status(fiber.StatusUnauthorized)
