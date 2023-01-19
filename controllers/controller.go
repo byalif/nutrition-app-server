@@ -213,8 +213,6 @@ func Login(c *fiber.Ctx) error{
 
     tokenString, err := token.SignedString([]byte(SecretKey))
 
-    c.Request().Header.Set("token",tokenString)
-
     if err!= nil {
          c.Status(fiber.StatusInternalServerError)
             return c.JSON(fiber.Map{
