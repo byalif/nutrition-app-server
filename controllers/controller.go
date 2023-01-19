@@ -187,12 +187,16 @@ func Login(c *fiber.Ctx) error{
 
     config.DB.Where("username=?", body["username"]).First(&user)
     if user.ID == 0 {
-            // c.Status(fiber.StatusNotFound)
-            return c.JSON(user)
+            c.Status(fiber.StatusNotFound)
+             return c.JSON(fiber.Map{
+                "error" : "NOT_FOUND",
+            })
     }else {
         if err := bcrypt.CompareHashAndPassword([]byte(user.Password),  []byte(body["password"])); err != nil {
             c.Status(fiber.StatusUnauthorized)
-            return c.JSON(user)
+             return c.JSON(fiber.Map{
+                "error" : "WRONG_PASSWORD",
+            })
         }
     }
 
