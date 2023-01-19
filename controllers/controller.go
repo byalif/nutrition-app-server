@@ -183,8 +183,6 @@ func Login(c *fiber.Ctx) error{
         log.Fatal(err)
     }
 
-         return c.JSON(body)
-    
     user:= models.User{ }
 
     config.DB.Where("username=?", body["username"]).Preload("Food").Preload("Food.Ingredient").First(&user)
