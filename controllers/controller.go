@@ -62,7 +62,7 @@ func DeleteCookie(c *fiber.Ctx) error {
         Name: "jwt",
         Value: "",
         Expires: time.Now().Add(-3 * time.Hour),
-        HTTPOnly: false,
+        HTTPOnly: true,
     }
 
     c.Cookie(&cookie)
@@ -226,7 +226,7 @@ func Login(c *fiber.Ctx) error{
         Name: "jwt",
         Value: tokenString,
         Expires: time.Now().Add(time.Hour * 24),
-        HTTPOnly: false,
+        HTTPOnly: true,
     }
 
     c.Cookie(&cookie)
