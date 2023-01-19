@@ -183,10 +183,10 @@ func Login(c *fiber.Ctx) error{
         log.Fatal(err)
     }
 
-    user:= models.User{ ID: null}
+    user:= models.User{ ID: nil}
 
     config.DB.Where("username=?", body["username"]).Preload("Food").Preload("Food.Ingredient").First(&user)
-    if user.ID == null {
+    if user.ID == nil {
             // c.Status(fiber.StatusNotFound)
             return c.JSON(user)
     }else {
