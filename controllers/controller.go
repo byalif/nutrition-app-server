@@ -5,6 +5,7 @@ import (
      "github.com/byalif/server/models"
     "github.com/byalif/server/config"
     "time"
+    "log"
     "strings"
      "golang.org/x/crypto/bcrypt"
      "strconv"
