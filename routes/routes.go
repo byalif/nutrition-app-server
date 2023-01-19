@@ -7,7 +7,7 @@ import (
 
 func Setup(app * fiber.App) {
     app.Post("/createUser", controllers.Register)
-    app.Get("/getUser", controllers.GetUser)
+    app.Post("/getUser", controllers.GetUser)
     app.Post("/login", controllers.Login)
     app.Post("/addFood", controllers.AddFood)
     app.Post("/deleteCookie", controllers.DeleteCookie)
