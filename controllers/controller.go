@@ -192,9 +192,7 @@ func Login(c *fiber.Ctx) error{
     }else {
         if err := bcrypt.CompareHashAndPassword([]byte(user.Password),  []byte(body["password"])); err != nil {
             c.Status(fiber.StatusUnauthorized)
-            return c.JSON(fiber.Map{
-                "error" : "WRONG_PASSWORD",
-            })
+            return c.JSON(user)
         }
     }
 
