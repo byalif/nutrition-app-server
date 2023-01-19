@@ -6,7 +6,7 @@ type User struct{
     gorm.Model
     Username string `gorm:"unique"json:"username"`
     Email string `json:"email"`
-    Age string `json:"age"`
+    Age int `json:"age"`
     Gender string `json:"gender"`
     Height int `json:"height"`
     Weight int `json:"weight"`
