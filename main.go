@@ -1,11 +1,26 @@
 package main
 
 import (
+    "os"
+    "log"
     "github.com/byalif/server/config"
     "github.com/byalif/server/routes"
     "github.com/gofiber/fiber/v2"
     "github.com/gofiber/fiber/v2/middleware/cors"
+    "github.com/joho/godotenv"
 )
+
+func goDotEnvVariable(key string) string {
+
+  // load .env file
+  err := godotenv.Load(".env")
+
+  if err != nil {
+    log.Fatalf("Error loading .env file")
+  }
+
+  return os.Getenv(key)
+}
 
 func main() {
     config.Connect()
@@ -20,7 +35,9 @@ func main() {
     }))
 
     routes.Setup(app)
+    
+    dotenv := goDotEnvVariable("PORT")
 
-
-    app.Listen(":8080")
+    str := ":"+ dotenv;
+    app.Listen(str)
 }
