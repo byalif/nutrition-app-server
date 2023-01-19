@@ -185,14 +185,16 @@ func Login(c *fiber.Ctx) error{
 
     var user models.User
 
-    config.DB.Where("username=?", body["username"]).Preload("Food").Preload("Food.Ingredient").Find(&user)
+    config.DB.Where("username=?", body["username"]).First(&user)
     if user.ID == 0 {
             // c.Status(fiber.StatusNotFound)
             return c.JSON(user)
     }else {
         if err := bcrypt.CompareHashAndPassword([]byte(user.Password),  []byte(body["password"])); err != nil {
             c.Status(fiber.StatusUnauthorized)
-            return c.JSON(err)
+            return c.JSON(fiber.Map{
+                "error" : "WRONG_PASSWORD",
+            })
         }
     }
 
