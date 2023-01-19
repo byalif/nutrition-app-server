@@ -156,10 +156,15 @@ func Register(c *fiber.Ctx) error {
 }
 
 func GetUser(c *fiber.Ctx) error{
-    cookie := c.Cookies("jwt")
+    // cookie := c.Cookies("jwt")
+    var data map[string]string
+
+    if err := c.BodyParser(&data); err!= nil {
+        return err
+    }
 
 
-    token, err := jwt.ParseWithClaims(string(cookie), &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+    token, err := jwt.ParseWithClaims(data["token"], &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
         return []byte(SecretKey), nil
     })
 
@@ -229,5 +234,7 @@ func Login(c *fiber.Ctx) error{
 
     c.Cookie(&cookie)
     c.Status(fiber.StatusOK)
-    return c.JSON(user)
+     return c.JSON(fiber.Map{
+                "token" : tokenString,
+            })
 }
