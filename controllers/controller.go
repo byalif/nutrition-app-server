@@ -179,7 +179,7 @@ func Login(c *fiber.Ctx) error{
     var body map[string]string
 
     if err := c.BodyParser(&body); err!= nil {
-        return err
+        log.Fatal(err)
     }
 
     user:= models.User{ Username: ""}
